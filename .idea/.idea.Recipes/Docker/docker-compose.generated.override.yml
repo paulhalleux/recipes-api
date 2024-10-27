@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  recipes.api:
+    build:
+      context: "W:\\apps\\recipes\\backend"
+      dockerfile: "src/Recipes.Api/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Recipes.Api.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "recipes.api:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\Paul HALLEUX\\.nuget\\packages:/home/app/.nuget/packages"
+    - "W:\\apps\\recipes\\backend\\src\\Recipes.Api:/app:rw"
+    - "W:\\apps\\recipes\\backend:/src:rw"
+    working_dir: "/app"
