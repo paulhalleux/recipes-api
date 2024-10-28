@@ -12,4 +12,7 @@ public class RecipesDbContext(DbContextOptions<RecipesDbContext> options) : DbCo
     }
 
     public DbSet<Recipe> Recipes => Set<Recipe>();
+    public DbSet<Ingredient> Ingredients => Set<Ingredient>();
+    public DbSet<RecipeIngredient> RecipeIngredients => Set<RecipeIngredient>();
+    public DbSet<Resource> Resources => Set<Resource>();
 }

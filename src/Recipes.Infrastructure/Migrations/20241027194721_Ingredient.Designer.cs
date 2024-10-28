@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Recipes.Infrastructure.Database;
@@ -11,9 +12,11 @@ using Recipes.Infrastructure.Database;
 namespace Recipes.Infrastructure.Migrations
 {
     [DbContext(typeof(RecipesDbContext))]
-    partial class RecipesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241027194721_Ingredient")]
+    partial class Ingredient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +41,7 @@ namespace Recipes.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("ImageId")
+                    b.Property<Guid>("ImageId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("LastModified")
@@ -47,9 +50,6 @@ namespace Recipes.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("Unit")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -74,9 +74,6 @@ namespace Recipes.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("ImageId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("timestamp with time zone");
 
@@ -86,42 +83,7 @@ namespace Recipes.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId");
-
                     b.ToTable("Recipes");
-                });
-
-            modelBuilder.Entity("Recipes.Application.Entities.RecipeIngredient", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<Guid>("IngredientId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("RecipeId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IngredientId");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("RecipeIngredients");
                 });
 
             modelBuilder.Entity("Recipes.Application.Entities.Resource", b =>
@@ -129,10 +91,6 @@ namespace Recipes.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<string>("ContentType")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
@@ -163,42 +121,11 @@ namespace Recipes.Infrastructure.Migrations
                 {
                     b.HasOne("Recipes.Application.Entities.Resource", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("Recipes.Application.Entities.Recipe", b =>
-                {
-                    b.HasOne("Recipes.Application.Entities.Resource", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("Recipes.Application.Entities.RecipeIngredient", b =>
-                {
-                    b.HasOne("Recipes.Application.Entities.Ingredient", "Ingredient")
-                        .WithMany()
-                        .HasForeignKey("IngredientId")
+                        .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Recipes.Application.Entities.Recipe", "Recipe")
-                        .WithMany("Ingredients")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ingredient");
-
-                    b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("Recipes.Application.Entities.Recipe", b =>
-                {
-                    b.Navigation("Ingredients");
+                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

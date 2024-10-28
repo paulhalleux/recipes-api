@@ -29,5 +29,7 @@ public static class Infrastructure
     public static void AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<IRecipesRepository, RecipesRepository>();
+        services.AddScoped<IIngredientsRepository, IngredientsRepository>();
+        services.AddScoped<IResourcesRepository, ResourcesRepository>();
     }
 }

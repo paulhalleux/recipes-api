@@ -15,6 +15,7 @@
       - "5432:5432"
     volumes:
       - recipes.db:/var/lib/postgresql/data
+      - /resources:/resources
 
 volumes:
   recipes.db:

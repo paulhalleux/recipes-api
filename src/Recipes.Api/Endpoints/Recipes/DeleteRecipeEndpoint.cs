@@ -8,12 +8,12 @@ public class DeleteRecipeEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints
-            .MapDelete("/recipes/{id}", Handle)
+            .MapDelete("/recipes/{id:guid}", Handler)
             .WithSummary("Delete a recipe by id")
             .WithTags("Recipes");
     }
     
-    private static async Task<Results<NotFound, NoContent>> Handle(Guid id, IRecipesRepository recipeRepository, CancellationToken cancellationToken)
+    private static async Task<Results<NotFound, NoContent>> Handler(Guid id, IRecipesRepository recipeRepository, CancellationToken cancellationToken)
     {
         var recipe = await recipeRepository.GetByIdAsync(id);
         if (recipe is null)

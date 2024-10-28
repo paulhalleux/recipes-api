@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipes.Application", "src\Recipes.Application\Recipes.Application.csproj", "{F848CF3F-0E2D-4399-ACE2-A38B46A5768A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +33,15 @@ Global
 		{0944142A-D95E-4CFF-9805-D7346263A7D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0944142A-D95E-4CFF-9805-D7346263A7D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0944142A-D95E-4CFF-9805-D7346263A7D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F848CF3F-0E2D-4399-ACE2-A38B46A5768A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F848CF3F-0E2D-4399-ACE2-A38B46A5768A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F848CF3F-0E2D-4399-ACE2-A38B46A5768A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F848CF3F-0E2D-4399-ACE2-A38B46A5768A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{441E642E-829A-4460-8EDA-05CEDC86BB89} = {7489E77B-B9E3-4B39-8C1F-2CA6E0C5A1A7}
 		{226974C9-0D7A-4C21-92B8-1DC7519A0397} = {7489E77B-B9E3-4B39-8C1F-2CA6E0C5A1A7}
 		{0944142A-D95E-4CFF-9805-D7346263A7D1} = {7489E77B-B9E3-4B39-8C1F-2CA6E0C5A1A7}
+		{F848CF3F-0E2D-4399-ACE2-A38B46A5768A} = {7489E77B-B9E3-4B39-8C1F-2CA6E0C5A1A7}
 	EndGlobalSection
 EndGlobal

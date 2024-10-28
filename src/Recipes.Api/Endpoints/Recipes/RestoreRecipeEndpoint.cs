@@ -9,14 +9,14 @@ public class RestoreRecipeEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints
-            .MapPut("/recipes/{id}/restore", Handle)
+            .MapPatch("/recipes/{id:guid}/restore", Handler)
             .WithSummary("Restore a recipe by id")
             .WithTags("Recipes");
     }
     
-    private static async Task<Results<NotFound, Ok<Recipe>>> Handle([AsParameters] RestoreRecipeByIdRequest request, IRecipesRepository recipeRepository, CancellationToken cancellationToken)
+    private static async Task<Results<NotFound, Ok<Recipe>>> Handler(Guid id, IRecipesRepository recipeRepository, CancellationToken cancellationToken)
     {
-        var restored = recipeRepository.RestoreById(request.Id);
+        var restored = recipeRepository.RestoreById(id);
         if (restored is null)
         {
             return TypedResults.NotFound();
@@ -25,6 +25,4 @@ public class RestoreRecipeEndpoint : IEndpoint
         await recipeRepository.SaveChangesAsync(cancellationToken);
         return TypedResults.Ok(restored);
     }
-    
-    internal record RestoreRecipeByIdRequest(Guid Id); 
 }

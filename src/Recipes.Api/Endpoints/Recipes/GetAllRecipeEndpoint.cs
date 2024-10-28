@@ -4,6 +4,7 @@ using Recipes.Application.Common;
 using Recipes.Application.Extensions;
 using Recipes.Application.Interfaces.Repositories;
 using Recipes.Common;
+using Recipes.Models.Recipe;
 
 namespace Recipes.Endpoints.Recipes;
 
@@ -12,7 +13,7 @@ public class GetAllRecipesEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints
-            .MapGet("recipes", Handler)
+            .MapGet("/recipes", Handler)
             .WithSummary("Get all recipes paginated")
             .WithTags("Recipes");
     }
@@ -25,6 +26,4 @@ public class GetAllRecipesEndpoint : IEndpoint
         
         return TypedResults.Ok(recipes);
     }
-    
-    internal record RecipeSummary(Guid Id, string Name, string Description, bool Deleted, DateTimeOffset Created, DateTimeOffset LastModified);
 }
