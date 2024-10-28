@@ -2,12 +2,12 @@
 
 namespace Recipes.Models.Ingredient;
 
-public record IngredientSummary(
+public record IngredientResponse(
     Guid Id,
     string Name,
     string Description,
     IngredientUnit Unit,
-    string ImageId,
+    Guid ImageId,
     bool Deleted,
     DateTimeOffset Created,
     DateTimeOffset LastModified);

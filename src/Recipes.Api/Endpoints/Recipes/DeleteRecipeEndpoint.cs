@@ -9,6 +9,7 @@ public class DeleteRecipeEndpoint : IEndpoint
     {
         endpoints
             .MapDelete("/recipes/{id:guid}", Handler)
+            .WithName("DeleteRecipe")
             .WithSummary("Delete a recipe by id")
             .WithTags("Recipes");
     }

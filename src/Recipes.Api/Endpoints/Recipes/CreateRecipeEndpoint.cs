@@ -12,6 +12,7 @@ public class CreateRecipeEndpoint : IEndpoint
     {
         endpoints
             .MapPost("/recipes", Handler)
+            .WithName("CreateRecipe")
             .WithSummary("Create a new recipe")
             .WithTags("Recipes");
     }

@@ -12,6 +12,7 @@ public class UpdateRecipeEndpoint : IEndpoint
     {
         endpoints
             .MapPut("/recipes/{id:guid}", Handler)
+            .WithName("UpdateRecipe")
             .WithSummary("Update a recipe")
             .WithTags("Recipes");
     }

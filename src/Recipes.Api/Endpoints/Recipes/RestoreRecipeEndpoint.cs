@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Mapster;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Recipes.Application.Entities;
 using Recipes.Application.Interfaces.Repositories;
+using Recipes.Models.Recipe;
 
 namespace Recipes.Endpoints.Recipes;
 
@@ -10,11 +12,12 @@ public class RestoreRecipeEndpoint : IEndpoint
     {
         endpoints
             .MapPatch("/recipes/{id:guid}/restore", Handler)
+            .WithName("RestoreRecipe")
             .WithSummary("Restore a recipe by id")
             .WithTags("Recipes");
     }
     
-    private static async Task<Results<NotFound, Ok<Recipe>>> Handler(Guid id, IRecipesRepository recipeRepository, CancellationToken cancellationToken)
+    private static async Task<Results<NotFound, Ok<RecipeResponse>>> Handler(Guid id, IRecipesRepository recipeRepository, CancellationToken cancellationToken)
     {
         var restored = recipeRepository.RestoreById(id);
         if (restored is null)
@@ -23,6 +26,6 @@ public class RestoreRecipeEndpoint : IEndpoint
         }
         
         await recipeRepository.SaveChangesAsync(cancellationToken);
-        return TypedResults.Ok(restored);
+        return TypedResults.Ok(restored.Adapt<RecipeResponse>());
     }
 }

@@ -14,6 +14,7 @@ public class GetAllResourcesEndpoint : IEndpoint
     {
         endpoints
             .MapGet("/resources", Handler)
+            .WithName("GetAllResources")
             .WithSummary("Get all resources paginated")
             .WithTags("Resources");
     }

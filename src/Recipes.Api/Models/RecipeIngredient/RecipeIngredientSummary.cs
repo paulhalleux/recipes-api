@@ -2,4 +2,4 @@
 
 namespace Recipes.Models.RecipeIngredient;
 
-public record RecipeIngredientSummary(Guid Id, IngredientSummary Ingredient, string Quantity);
+public record RecipeIngredientSummary(Guid Id, IngredientResponse Ingredient, string Quantity);

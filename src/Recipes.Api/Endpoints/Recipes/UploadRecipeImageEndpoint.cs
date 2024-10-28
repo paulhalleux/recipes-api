@@ -15,6 +15,7 @@ public class UploadRecipeImageEndpoint : IEndpoint
     {
         endpoints.MapPost("/recipes/{id:guid}/image", Handler)
             .Accepts<IFormFile>("multipart/form-data")
+            .WithName("UploadRecipeImage")
             .WithSummary("Uploads an image for a recipe.")
             .WithTags("Recipes")
             .DisableAntiforgery();
@@ -23,7 +24,7 @@ public class UploadRecipeImageEndpoint : IEndpoint
     [Consumes("multipart/form-data")]
     [IgnoreAntiforgeryToken]
     private static async Task<Results<NotFound, Ok>> Handler(
-        [FromForm] IFormFile file,
+        IFormFile file,
         [FromRoute] Guid id,
         [FromServices] IRecipesRepository recipesRepository,
         [FromServices] IResourcesRepository resourcesRepository,

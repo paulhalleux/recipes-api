@@ -9,6 +9,7 @@ public class GetResourceByIdEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/resources/{id:guid}", Handler)
+            .WithName("GetResourceById")
             .WithSummary("Retrieves a resource by its id")
             .WithTags("Resources")
             .Accepts<Resource>("application/json");

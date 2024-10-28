@@ -14,17 +14,18 @@ public class GetAllIngredientsEndpoint : IEndpoint
     {
         endpoints
             .MapGet("/ingredients", Handler)
+            .WithName("GetAllIngredients")
             .WithSummary("Get all ingredients paginated")
             .WithTags("Ingredients");
     }
 
-    private static Ok<Paginated<IngredientSummary>> Handler([AsParameters] PaginationRequest request,
+    private static Ok<Paginated<IngredientResponse>> Handler([AsParameters] PaginationRequest request,
         IIngredientsRepository ingredientsRepository, CancellationToken cancellationToken)
     {
         var recipes = ingredientsRepository
             .GetAllNoTracking()
             .Paginate(request.Page ?? 1, request.PageSize ?? 10,
-                recipe => recipe.Adapt<IngredientSummary>());
+                recipe => recipe.Adapt<IngredientResponse>());
         
         return TypedResults.Ok(recipes);
     }

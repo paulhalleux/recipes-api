@@ -6,7 +6,7 @@ public record RecipeResponse(
     Guid Id,
     string Name,
     string Description,
-    string ImageId,
+    Guid ImageId,
     bool Deleted,
     DateTimeOffset Created,
     DateTimeOffset LastModified,

@@ -14,6 +14,7 @@ public class GetAllRecipesEndpoint : IEndpoint
     {
         endpoints
             .MapGet("/recipes", Handler)
+            .WithName("GetAllRecipes")
             .WithSummary("Get all recipes paginated")
             .WithTags("Recipes");
     }

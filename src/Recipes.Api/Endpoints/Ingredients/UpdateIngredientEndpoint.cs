@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Mapster;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Recipes.Application.Entities;
 using Recipes.Application.Enums;
 using Recipes.Application.Interfaces.Repositories;
@@ -12,11 +13,12 @@ public class UpdateIngredientEndpoint : IEndpoint
     {
         endpoints
             .MapPut("/ingredients/{id:guid}", Handler)
+            .WithName("UpdateIngredient")
             .WithSummary("Update an ingredient")
             .WithTags("Ingredients");
     }
 
-    private static async Task<Results<NotFound, Ok<Ingredient>>> Handler(Guid id, UpdateIngredientRequest request, IIngredientsRepository ingredientsRepository, CancellationToken cancellationToken)
+    private static async Task<Results<NotFound, Ok<IngredientResponse>>> Handler(Guid id, UpdateIngredientRequest request, IIngredientsRepository ingredientsRepository, CancellationToken cancellationToken)
     {
         var ingredient = await ingredientsRepository.GetByIdAsync(id);
         if (ingredient is null)
@@ -29,6 +31,6 @@ public class UpdateIngredientEndpoint : IEndpoint
         ingredientsRepository.Update(ingredient);
         await ingredientsRepository.SaveChangesAsync(cancellationToken);
 
-        return TypedResults.Ok(ingredient);
+        return TypedResults.Ok(ingredient.Adapt<IngredientResponse>());
     }
 }

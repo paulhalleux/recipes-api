@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Mapster;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Recipes.Application.Entities;
 using Recipes.Application.Enums;
 using Recipes.Application.Interfaces.Repositories;
@@ -13,10 +14,11 @@ public class CreateIngredientEndpoint : IEndpoint
         endpoints
             .MapPost("/ingredients", Handler)
             .WithSummary("Create a new ingredient")
+            .WithName("CreateIngredient")
             .WithTags("Ingredients");
     }
 
-    private static async Task<Created<Ingredient>> Handler(CreateIngredientRequest request, IIngredientsRepository ingredientsRepository, CancellationToken cancellationToken)
+    private static async Task<Created<IngredientResponse>> Handler(CreateIngredientRequest request, IIngredientsRepository ingredientsRepository, CancellationToken cancellationToken)
     {
         var ingredient = new Ingredient(
             Guid.NewGuid(),
@@ -28,6 +30,6 @@ public class CreateIngredientEndpoint : IEndpoint
         ingredientsRepository.Add(ingredient);
         await ingredientsRepository.SaveChangesAsync(cancellationToken);
 
-        return TypedResults.Created("/ingredients", ingredient);
+        return TypedResults.Created("/ingredients", ingredient.Adapt<IngredientResponse>());
     }
 }

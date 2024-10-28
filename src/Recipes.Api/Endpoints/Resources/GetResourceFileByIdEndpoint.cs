@@ -9,6 +9,7 @@ public class GetResourceFileByIdEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/resources/{id:guid}/file", Handler)
+            .WithName("GetResourceFileById")
             .WithSummary("Retrieves a resource file by its id")
             .WithTags("Resources")
             .Accepts<FileResult>("*/*");

@@ -11,6 +11,7 @@ public class GetRecipeByIdEndpoint : IEndpoint
     {
         endpoints
             .MapGet("/recipes/{id:guid}", Handler)
+            .WithName("GetRecipeById")
             .WithSummary("Get a recipe by id")
             .WithTags("Recipes");
     }
